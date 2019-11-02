@@ -83,14 +83,14 @@ public extension NSFont {
     ///
     /// - parameter ofSize: The preferred font size.
     /// - returns: A NSFont object of FontAwesome.
-    public class func fontAwesome(ofSize fontSize: CGFloat, style: FontAwesomeStyle) -> NSFont {
+    class func fontAwesome(ofSize fontSize: CGFloat, style: FontAwesomeStyle) -> NSFont {
         loadFontAwesome(ofStyle: style)
         return NSFont(name: style.fontName(), size: fontSize)!
     }
 
     /// Loads the FontAwesome font in to memory.
     /// This method should be called when setting icons without using code.
-    public class func loadFontAwesome(ofStyle style: FontAwesomeStyle) {
+    class func loadFontAwesome(ofStyle style: FontAwesomeStyle) {
         let availableMembers = NSFontManager.shared.availableMembers(ofFontFamily: style.fontFamilyName())
         if let isFontLoaded = availableMembers?.contains(where: { $0[0] as! String == style.fontName() }),
             isFontLoaded {
@@ -108,7 +108,7 @@ public extension String {
     ///
     /// - parameter name: The preferred icon name.
     /// - returns: A string that will appear as icon with FontAwesome.
-    public static func fontAwesomeIcon(name: FontAwesome) -> String {
+    static func fontAwesomeIcon(name: FontAwesome) -> String {
         let toIndex = name.rawValue.index(name.rawValue.startIndex, offsetBy: 1)
         return String(name.rawValue[name.rawValue.startIndex..<toIndex])
     }
@@ -117,7 +117,7 @@ public extension String {
     ///
     /// - parameter code: The preferred icon name.
     /// - returns: A string that will appear as icon with FontAwesome.
-    public static func fontAwesomeIcon(code: String) -> String? {
+    static func fontAwesomeIcon(code: String) -> String? {
 
         guard let name = self.fontAwesome(code: code) else {
             return nil
@@ -130,7 +130,7 @@ public extension String {
     ///
     /// - parameter code: The preferred icon name.
     /// - returns: An internal corresponding FontAwesome code.
-    public static func fontAwesome(code: String) -> FontAwesome? {
+    static func fontAwesome(code: String) -> FontAwesome? {
         guard let raw = FontAwesomeIcons[code] else { return nil }
         return FontAwesome(rawValue: raw)
     }
@@ -139,7 +139,7 @@ public extension String {
 /// A FontAwesome extension to NSImage.
 public extension NSImage {
 
-    public static func fontAwesomeIcon(name: FontAwesome,
+    static func fontAwesomeIcon(name: FontAwesome,
                                        style: FontAwesomeStyle,
                                        textColor: NSColor,
                                        dimension: CGFloat,
@@ -152,7 +152,7 @@ public extension NSImage {
                                backgroundColor: backgroundColor)
     }
 
-    public static func fontAwesomeIcon(code: String,
+    static func fontAwesomeIcon(code: String,
                                        style: FontAwesomeStyle,
                                        textColor: NSColor,
                                        dimension: CGFloat,
@@ -177,7 +177,7 @@ public extension NSImage {
     ///
     /// - Note: The dimensions of the returned image may be smaller/larger than the requested `size`.
     ///
-    public static func fontAwesomeIcon(name: FontAwesome, style: FontAwesomeStyle, textColor: NSColor, size: CGSize, backgroundColor: NSColor = NSColor.clear, borderWidth: CGFloat = 0, borderColor: NSColor = NSColor.clear) -> NSImage {
+    static func fontAwesomeIcon(name: FontAwesome, style: FontAwesomeStyle, textColor: NSColor, size: CGSize, backgroundColor: NSColor = NSColor.clear, borderWidth: CGFloat = 0, borderColor: NSColor = NSColor.clear) -> NSImage {
 
         // Prevent application crash when passing size where width or height is set equal to or less than zero, by clipping width and height to a minimum of 1 pixel.
         var size = size
@@ -223,7 +223,7 @@ public extension NSImage {
     /// - parameter size: The image size.
     /// - parameter backgroundColor: The background color (optional).
     /// - returns: A string that will appear as icon with FontAwesome
-    public static func fontAwesomeIcon(code: String, style: FontAwesomeStyle, textColor: NSColor, size: CGSize, backgroundColor: NSColor = NSColor.clear, borderWidth: CGFloat = 0, borderColor: NSColor = NSColor.clear) -> NSImage? {
+    static func fontAwesomeIcon(code: String, style: FontAwesomeStyle, textColor: NSColor, size: CGSize, backgroundColor: NSColor = NSColor.clear, borderWidth: CGFloat = 0, borderColor: NSColor = NSColor.clear) -> NSImage? {
         guard let name = String.fontAwesome(code: code) else { return nil }
         return fontAwesomeIcon(name: name, style: style, textColor: textColor, size: size, backgroundColor: backgroundColor, borderWidth: borderWidth, borderColor: borderColor)
     }
